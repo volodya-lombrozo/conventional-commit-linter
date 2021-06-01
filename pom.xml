@@ -5,12 +5,59 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.volodya-lombrozo</groupId>
-    <artifactId>conventional-commit-lint</artifactId>
+    <artifactId>conventional-commit-linter</artifactId>
     <version>0.0.1</version>
+    <packaging>maven-plugin</packaging>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>
+        Conventional Commit (https://www.conventionalcommits.org/en/v1.0.0/) Linter plugin for Maven projects
+    </description>
+    <url>https://github.com/volodya-lombrozo/conventional-commit-linter</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Volodya Lombrozo</name>
+            <email>volodya.lombrozo@yandex.ru</email>
+            <roles>
+                <role>
+                    Developer
+                </role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:volodya-lombrozo/conventional-commit-linter.git</connection>
+        <developerConnection>scm:git:ssh://@github.com:volodya-lombrozo/conventional-commit-linter.git</developerConnection>
+        <url>https://github.com/volodya-lombrozo/conventional-commit-linter/tree/main</url>
+    </scm>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>
