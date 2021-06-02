@@ -1,12 +1,10 @@
 package com.github.volodya_lombrozo.conventional_commit_linter;
 
-import com.github.volodya_lombrozo.conventional_commit_linter.maven.Clean;
-import com.github.volodya_lombrozo.conventional_commit_linter.maven.Install;
-import com.github.volodya_lombrozo.conventional_commit_linter.maven.Maven;
-import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.Mojo;
 import org.apache.maven.plugin.testing.MojoRule;
-import org.apache.maven.shared.invoker.*;
-import org.junit.*;
+import org.codehaus.plexus.configuration.PlexusConfiguration;
+import org.junit.Rule;
+import org.junit.Test;
 
 import java.io.File;
 
@@ -16,30 +14,35 @@ public class ValidateMojoTest {
 
     @Rule
     public MojoRule rule = new MojoRule();
-    private final Maven maven = new Maven();
-
-    @Before
-    public void setUp() throws MavenInvocationException {
-        maven.execute(new Install());
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        maven.execute(new Clean());
-    }
 
     @Test
-    @Ignore("Not worked yet")//todo
     public void execute() throws Exception {
-        final AbstractMojo verify = getMojo();
+        final Mojo verify = fromFile();
+
+        verify.execute();
 
         assertNotNull(verify);
     }
 
 
-    private AbstractMojo getMojo() throws Exception {
+    @Test
+    public void integration() throws Exception {
+        final Mojo mojo = createMojo();
+
+        mojo.execute();
+    }
+
+    private Mojo createMojo() throws Exception {
         final File pom = new File("src/test/resources/test.pom.xml");
-        return (AbstractMojo) rule.lookupEmptyMojo("scan", pom);
+        final PlexusConfiguration configuration = rule.extractPluginConfiguration("conventional-commit-linter", pom);
+        return rule.configureMojo(new ValidateMojo(), configuration);
+    }
+
+    private Mojo fromFile() throws Exception {
+        final File pom = new File("src/test/resources/test.pom.xml");
+        final PlexusConfiguration configuration = rule.extractPluginConfiguration("conventional-commit-linter", pom);
+        return rule.lookupEmptyMojo("scan", pom);
+
     }
 
 }

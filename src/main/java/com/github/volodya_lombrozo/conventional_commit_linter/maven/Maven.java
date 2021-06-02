@@ -4,9 +4,6 @@ import org.apache.maven.shared.invoker.DefaultInvoker;
 import org.apache.maven.shared.invoker.Invoker;
 import org.apache.maven.shared.invoker.MavenInvocationException;
 
-import java.io.File;
-import java.util.Arrays;
-
 public class Maven {
 
     private final Invoker invoker;
