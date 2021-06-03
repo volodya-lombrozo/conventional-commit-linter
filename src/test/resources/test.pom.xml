@@ -21,9 +21,9 @@
                 <artifactId>conventional-commit-linter</artifactId>
                 <version>0.0.1</version>
                 <configuration>
-                    <project>
-                        ${project}
-                    </project>
+                    <skip>
+                        false
+                    </skip>
                 </configuration>
             </plugin>
         </plugins>
