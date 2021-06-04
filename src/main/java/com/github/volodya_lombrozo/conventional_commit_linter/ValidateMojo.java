@@ -1,27 +1,27 @@
 package com.github.volodya_lombrozo.conventional_commit_linter;
 
+import com.github.volodya_lombrozo.conventional_commit_linter.commit.Commit;
+import com.github.volodya_lombrozo.conventional_commit_linter.commit.FakeCommit;
+import com.github.volodya_lombrozo.conventional_commit_linter.exceptions.InvalidCommit;
+import com.github.volodya_lombrozo.conventional_commit_linter.rule.Format;
+import com.github.volodya_lombrozo.conventional_commit_linter.rule.FreeFormat;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.Parameter;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 @Mojo(name = "scan")
 public class ValidateMojo extends AbstractMojo {
 
-    @Parameter
-    private boolean skip = true;
-
-
     @Override
     public void execute() {
-        getLog().info("Validation Phase started");
-        if (skip) {
-            throw new IllegalStateException("Project not configured properly");
-        } else {
-            System.out.println("Plugin is passed");
+        try {
+            getLog().info("Conventional commit validation phase started");
+            final Commit commit = new FakeCommit();
+            final Format format = new FreeFormat();
+            final ConventionalCommit conventional = new ConventionalCommit(commit, format);
+            conventional.validate();
+            getLog().info("Conventional commit validation passed");
+        } catch (InvalidCommit invalidCommit) {
+            getLog().error(invalidCommit);
         }
     }
 }
