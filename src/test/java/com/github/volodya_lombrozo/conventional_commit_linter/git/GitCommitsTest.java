@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class GitCommitsTest {
 
     private final String path = Path.of("src", "test", "resources",
-            "git_repo_example", ".git")
+            "git_repo_example.git")
             .toAbsolutePath().toString();
 
     @Test
