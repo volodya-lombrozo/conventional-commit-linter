@@ -11,7 +11,9 @@ import static org.junit.Assert.*;
 
 public class GitCommitsTest {
 
-    private final String path = Path.of("src/test/resources/git_repo_example").toAbsolutePath().toString();
+    private final String path = Path.of("src", "test", "resources",
+            "git_repo_example", ".git")
+            .toAbsolutePath().toString();
 
     @Test
     public void last() throws IOException {
@@ -30,8 +32,8 @@ public class GitCommitsTest {
 
         assertNotNull(queue);
         assertEquals(3, queue.size());
-        assertEquals(new GitCommit("one"), queue.peek());
-        assertEquals(new GitCommit("two"), queue.peek());
-        assertEquals(new GitCommit("three"), queue.peek());
+        assertEquals(new GitCommit("one"), queue.poll());
+        assertEquals(new GitCommit("two"), queue.poll());
+        assertEquals(new GitCommit("three"), queue.poll());
     }
 }
