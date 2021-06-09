@@ -2,8 +2,8 @@ package com.github.volodya_lombrozo.conventional_commit_linter;
 
 import com.github.volodya_lombrozo.conventional_commit_linter.commit.FakeCommit;
 import com.github.volodya_lombrozo.conventional_commit_linter.exceptions.InvalidCommit;
-import com.github.volodya_lombrozo.conventional_commit_linter.rule.FreeFormat;
-import com.github.volodya_lombrozo.conventional_commit_linter.rule.WrongFormat;
+import com.github.volodya_lombrozo.conventional_commit_linter.format.FreeFormat;
+import com.github.volodya_lombrozo.conventional_commit_linter.format.WrongFormat;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

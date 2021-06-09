@@ -1,4 +1,4 @@
-package com.github.volodya_lombrozo.conventional_commit_linter.rule;
+package com.github.volodya_lombrozo.conventional_commit_linter.format;
 
 import java.util.UUID;
 

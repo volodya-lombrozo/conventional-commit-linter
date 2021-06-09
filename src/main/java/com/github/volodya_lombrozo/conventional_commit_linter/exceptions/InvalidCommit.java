@@ -1,7 +1,7 @@
 package com.github.volodya_lombrozo.conventional_commit_linter.exceptions;
 
 import com.github.volodya_lombrozo.conventional_commit_linter.commit.Commit;
-import com.github.volodya_lombrozo.conventional_commit_linter.rule.Format;
+import com.github.volodya_lombrozo.conventional_commit_linter.format.Format;
 
 public class InvalidCommit extends Exception {
 

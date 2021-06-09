@@ -2,7 +2,7 @@ package com.github.volodya_lombrozo.conventional_commit_linter;
 
 import com.github.volodya_lombrozo.conventional_commit_linter.commit.Commit;
 import com.github.volodya_lombrozo.conventional_commit_linter.exceptions.InvalidCommit;
-import com.github.volodya_lombrozo.conventional_commit_linter.rule.Format;
+import com.github.volodya_lombrozo.conventional_commit_linter.format.Format;
 
 import java.util.regex.Pattern;
 

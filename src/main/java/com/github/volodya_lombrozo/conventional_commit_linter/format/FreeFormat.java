@@ -1,4 +1,4 @@
-package com.github.volodya_lombrozo.conventional_commit_linter.rule;
+package com.github.volodya_lombrozo.conventional_commit_linter.format;
 
 public class FreeFormat implements Format {
     @Override
