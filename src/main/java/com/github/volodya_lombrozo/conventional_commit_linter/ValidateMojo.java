@@ -14,7 +14,6 @@ public class ValidateMojo extends AbstractMojo {
     @Override
     public void execute() {
         try {
-            getLog().info("Conventional commit validation phase started");
             final Commit commit = new FakeCommit();
             final Format format = new FreeFormat();
             final ConventionalCommit conventional = new ConventionalCommit(commit, format);
