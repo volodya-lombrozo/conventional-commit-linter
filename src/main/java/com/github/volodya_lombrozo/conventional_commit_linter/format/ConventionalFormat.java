@@ -13,7 +13,7 @@ public class ConventionalFormat implements Format {
     private final List<String> types;
 
     public ConventionalFormat() {
-        this("feat", "fix", "refactor", "docs");
+        this("feat", "fix", "style", "test", "refactor", "docs", "chore");
     }
 
     public ConventionalFormat(String... types) {
