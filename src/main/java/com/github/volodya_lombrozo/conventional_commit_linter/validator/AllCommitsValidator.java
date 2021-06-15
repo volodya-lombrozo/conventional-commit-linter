@@ -4,6 +4,7 @@ import com.github.volodya_lombrozo.conventional_commit_linter.commit.Commit;
 import com.github.volodya_lombrozo.conventional_commit_linter.commit.Commits;
 import com.github.volodya_lombrozo.conventional_commit_linter.exceptions.InvalidCommit;
 import com.github.volodya_lombrozo.conventional_commit_linter.format.Format;
+import com.github.volodya_lombrozo.conventional_commit_linter.format.FreeFormat;
 
 import java.io.IOException;
 
@@ -11,6 +12,10 @@ public class AllCommitsValidator implements Validator {
 
     private final Commits commits;
     private final Format format;
+
+    public AllCommitsValidator(Commits commits) {
+        this(commits, new FreeFormat());
+    }
 
     public AllCommitsValidator(Commits commits, Format format) {
         this.commits = commits;
