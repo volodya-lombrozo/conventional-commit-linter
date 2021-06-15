@@ -1,4 +1,4 @@
-package com.github.volodya_lombrozo.conventional_commit_linter;
+package com.github.volodya_lombrozo.conventional_commit_linter.validator;
 
 import com.github.volodya_lombrozo.conventional_commit_linter.commit.FakeCommit;
 import com.github.volodya_lombrozo.conventional_commit_linter.exceptions.InvalidCommit;
@@ -6,14 +6,14 @@ import com.github.volodya_lombrozo.conventional_commit_linter.format.FreeFormat;
 import com.github.volodya_lombrozo.conventional_commit_linter.format.WrongFormat;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
-public class ConventionalCommitTest {
+public class CommitValidatorTest {
 
     @Test
     public void validateSuccessful() {
         try {
-            final ConventionalCommit commit = new ConventionalCommit(new FakeCommit(), new FreeFormat());
+            final CommitValidator commit = new CommitValidator(new FakeCommit(), new FreeFormat());
 
             commit.validate();
 
@@ -24,7 +24,7 @@ public class ConventionalCommitTest {
 
     @Test(expected = InvalidCommit.class)
     public void validateFailed() throws InvalidCommit {
-        final ConventionalCommit commit = new ConventionalCommit(new FakeCommit(), new WrongFormat());
+        final CommitValidator commit = new CommitValidator(new FakeCommit(), new WrongFormat());
 
         commit.validate();
     }

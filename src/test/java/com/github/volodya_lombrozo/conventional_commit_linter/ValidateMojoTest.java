@@ -7,6 +7,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class ValidateMojoTest {
 
@@ -21,7 +23,11 @@ public class ValidateMojoTest {
     }
 
     private Mojo createMojo() throws Exception {
-        return rule.lookupMojo("scan", new File("src/test/resources/test.pom.xml"));
+        return rule.lookupMojo("scan", pom().toFile());
+    }
+
+    private Path pom(){
+        return Path.of("src", "test", "resources", "test.pom.xml");
     }
 
 }

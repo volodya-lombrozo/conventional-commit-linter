@@ -15,6 +15,10 @@ public class GitCommits implements Commits {
 
     private final ProcessBuilder processBuilder;
 
+    public GitCommits() {
+        this(".");
+    }
+
     public GitCommits(String dir) {
         this(new ProcessBuilder("git", "--git-dir=" + dir, "log", "--pretty=format:%s"));
     }

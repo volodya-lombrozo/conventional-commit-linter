@@ -20,7 +20,9 @@
                 <groupId>com.github.volodya-lombrozo</groupId>
                 <artifactId>conventional-commit-linter</artifactId>
                 <version>0.0.1</version>
-                <configuration/>
+                <configuration>
+                    <scan>NOTHING</scan>
+                </configuration>
             </plugin>
         </plugins>
     </build>
