@@ -15,7 +15,8 @@ public class ValidateMojo extends AbstractMojo {
     @Override
     public void execute() {
         try {
-            final Validator validator = Scan.valueOf(scan).validator();
+            Scan scanType = Scan.valueOf(this.scan);
+            Validator validator = scanType.validator();
             validator.validate();
             getLog().info("Conventional commit validation passed");
         } catch (InvalidCommit invalidCommit) {

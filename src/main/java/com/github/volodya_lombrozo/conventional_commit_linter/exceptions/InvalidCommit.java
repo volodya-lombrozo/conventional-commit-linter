@@ -16,4 +16,7 @@ public class InvalidCommit extends Exception {
         super(String.format("Commit %s not matches with the next format: %s . Please, change the commit formatting.", commit, format));
     }
 
+    public InvalidCommit(String message) {
+        super(message);
+    }
 }

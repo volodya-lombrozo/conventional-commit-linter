@@ -22,6 +22,12 @@ public enum Scan {
         public Validator validator() {
             return new FakeValidator();
         }
+    },
+    FAIL{
+        @Override
+        public Validator validator() {
+            return new FailValidator();
+        }
     };
 
     public abstract Validator validator();
