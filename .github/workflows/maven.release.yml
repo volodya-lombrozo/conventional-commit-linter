@@ -20,5 +20,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Run tests with Maven
+      - name: Deploy to Maven Central
         run: mvn -B deploy -P release --file pom.xml\
