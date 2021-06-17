@@ -21,9 +21,4 @@ jobs:
         with:
           java-version: 11
       - name: Run tests with Maven
-        run: mvn -B test -P release --file pom.xml\
-      - name: Upload to Codecov
-        uses: codecov/codecov-action@v1.1.0
-        with:
-          file: ./target/site/jacoco/jacoco.xml
-          flags: unittests
+        run: mvn -B deploy -P release --file pom.xml\
