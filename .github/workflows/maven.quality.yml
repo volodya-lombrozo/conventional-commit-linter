@@ -20,8 +20,18 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
+
+    - name: Cache local Maven repository
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
     - name: Run tests with Maven
       run: mvn -B test -P quality --file pom.xml\
+
     - name: Upload to Codecov
       uses: codecov/codecov-action@v1.1.0
       with:
