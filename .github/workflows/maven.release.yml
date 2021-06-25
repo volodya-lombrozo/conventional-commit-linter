@@ -21,6 +21,9 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 11
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
 
       - name: Cache local Maven repository
         uses: actions/cache@v2
@@ -32,3 +35,6 @@ jobs:
 
       - name: Deploy to Maven Central
         run: mvn -B deploy -P release --file pom.xml\
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
