@@ -39,5 +39,4 @@ jobs:
         run: mvn -B deploy -P release --file pom.xml\
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
