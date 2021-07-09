@@ -15,17 +15,25 @@ public class ValidateMojo extends AbstractMojo {
     @Parameter(property = "scan", defaultValue = "NOTHING")
     public String scan;
 
-    private final Log log = new MojoLog(getLog());
+    private Log log = new MojoLog(getLog());
 
     @Override
     public void execute() {
         try {
+            log.info(String.format("Scan strategy: %s", scan));
             Scan scanType = Scan.valueOf(this.scan);
-            Validator validator = scanType.validator();
+            Validator validator = scanType.validator(log);
             validator.validate();
             log.info("Conventional commit validation passed");
         } catch (InvalidCommit invalidCommit) {
             log.error(invalidCommit);
         }
+    }
+
+
+    @Override
+    public void setLog(org.apache.maven.plugin.logging.Log log) {
+        super.setLog(log);
+        this.log = new MojoLog(log);
     }
 }

@@ -19,9 +19,7 @@ public class GitCommit implements Commit {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", GitCommit.class.getSimpleName() + "[", "]")
-                .add("message='" + message + "'")
-                .toString();
+        return String.format("GitCommit[message='%s']", message);
     }
 
     @Override
