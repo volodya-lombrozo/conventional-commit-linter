@@ -3,7 +3,9 @@ package com.github.volodya_lombrozo.conventional_commit_linter.git;
 import com.github.volodya_lombrozo.conventional_commit_linter.commit.Commit;
 import com.github.volodya_lombrozo.conventional_commit_linter.commit.Commits;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystem;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -15,7 +17,7 @@ public class GitCommits implements Commits {
     private final GitProcess process;
 
     public GitCommits() {
-        this(".");
+        this(System.getProperty("user.dir") + File.separator + ".git");
     }
 
     public GitCommits(String dir) {
