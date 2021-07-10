@@ -15,6 +15,10 @@ public class StringInputStream {
         this.is = is;
     }
 
+    public String toText() throws IOException {
+        return String.join("\n", lines());
+    }
+
     public List<String> lines() throws IOException {
         try (is) {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));

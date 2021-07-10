@@ -12,18 +12,18 @@ import java.util.stream.Collectors;
 
 public class GitCommits implements Commits {
 
-    private final ProcessBuilder processBuilder;
+    private final GitProcess process;
 
     public GitCommits() {
         this(".");
     }
 
     public GitCommits(String dir) {
-        this(new ProcessBuilder("git", "--git-dir=" + dir, "log", "--pretty=format:%s"));
+        this(new GitProcess(dir));
     }
 
-    public GitCommits(ProcessBuilder processBuilder) {
-        this.processBuilder = processBuilder;
+    public GitCommits(GitProcess gitProcess) {
+        this.process = gitProcess;
     }
 
 
@@ -34,7 +34,7 @@ public class GitCommits implements Commits {
 
     @Override
     public Deque<Commit> toQueue() throws IOException {
-        final List<String> messages = new GitProcess(processBuilder.start()).execute();
+        final List<String> messages = process.execute();
         final LinkedList<Commit> commits = messages.stream().map(GitCommit::new).collect(Collectors.toCollection(LinkedList::new));
         Collections.reverse(commits);
         return commits;
