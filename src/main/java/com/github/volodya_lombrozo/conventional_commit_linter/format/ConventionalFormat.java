@@ -36,7 +36,7 @@ public class ConventionalFormat implements Format {
     @Override
     public String toString() {
         return new StringJoiner(", ", "ConventionalFormat[", "]")
-                .add("Allowed types=" + String.join(",", types))
+                .add("Allowed types=" + types.stream().collect(Collectors.joining(", ", "(", ")")))
                 .add("Version https://www.conventionalcommits.org/en/v1.0.0-beta.4/")
                 .toString();
     }
