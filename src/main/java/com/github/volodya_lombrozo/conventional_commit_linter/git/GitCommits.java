@@ -39,4 +39,9 @@ public class GitCommits implements Commits {
         Collections.reverse(commits);
         return commits;
     }
+
+    @Override
+    public String toString() {
+        return "GitCommits";
+    }
 }

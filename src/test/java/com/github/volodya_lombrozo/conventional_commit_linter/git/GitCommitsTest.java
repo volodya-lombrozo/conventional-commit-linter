@@ -36,4 +36,13 @@ public class GitCommitsTest {
         assertEquals(new GitCommit("two"), queue.poll());
         assertEquals(new GitCommit("three"), queue.poll());
     }
+
+    @Test
+    public void toStringTest(){
+        GitCommits commits = new GitCommits();
+
+        String actual = commits.toString();
+
+        assertEquals("GitCommits", actual);
+    }
 }
