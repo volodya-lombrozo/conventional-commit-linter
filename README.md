@@ -12,7 +12,7 @@ Add plugin to pom.xml (to plugins section)
 <plugin>
     <groupId>com.github.volodya-lombrozo</groupId>
     <artifactId>conventional-commit-linter</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <configuration>
         <scan>ALL</scan>
     </configuration>
