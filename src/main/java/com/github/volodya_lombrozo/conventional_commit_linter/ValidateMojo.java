@@ -5,6 +5,7 @@ import com.github.volodya_lombrozo.conventional_commit_linter.log.Log;
 import com.github.volodya_lombrozo.conventional_commit_linter.log.MojoLog;
 import com.github.volodya_lombrozo.conventional_commit_linter.validator.Validator;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -18,7 +19,7 @@ public class ValidateMojo extends AbstractMojo {
     private Log log = new MojoLog(getLog());
 
     @Override
-    public void execute() {
+    public void execute() throws MojoExecutionException {
         try {
             log.info(String.format("Scan strategy: %s", scan));
             Scan scanType = Scan.valueOf(this.scan);
@@ -27,6 +28,7 @@ public class ValidateMojo extends AbstractMojo {
             log.info("Conventional commit validation passed");
         } catch (InvalidCommit invalidCommit) {
             log.error(invalidCommit);
+            throw new MojoExecutionException("Conventional commit validation failed", invalidCommit);
         }
     }
 

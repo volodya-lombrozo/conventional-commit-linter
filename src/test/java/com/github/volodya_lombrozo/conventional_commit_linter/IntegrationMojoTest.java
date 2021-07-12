@@ -1,17 +1,15 @@
 package com.github.volodya_lombrozo.conventional_commit_linter;
 
-import com.github.volodya_lombrozo.conventional_commit_linter.exceptions.InvalidCommit;
 import org.apache.maven.plugin.Mojo;
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.testing.MojoRule;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.nio.file.Path;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
 
 public class IntegrationMojoTest {
 
@@ -25,7 +23,7 @@ public class IntegrationMojoTest {
         mojo.execute();
     }
 
-    @Test
+    @Test(expected = MojoExecutionException.class)
     public void filedScan() throws Exception {
         Path failPom = fail();
         final Mojo mojo = createMojo(failPom);
@@ -34,7 +32,7 @@ public class IntegrationMojoTest {
 
         mojo.execute();
 
-        verify(mockLog).error(any(InvalidCommit.class));
+        Assert.fail();
     }
 
     private Mojo createMojo(Path pom) throws Exception {
