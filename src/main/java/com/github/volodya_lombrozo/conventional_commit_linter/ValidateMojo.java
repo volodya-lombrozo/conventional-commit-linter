@@ -28,14 +28,15 @@ public class ValidateMojo extends AbstractMojo {
             log.info("Conventional commit validation passed");
         } catch (InvalidCommit invalidCommit) {
             log.error(invalidCommit);
-            throw new MojoExecutionException("Conventional commit validation failed", invalidCommit);
+            throw new MojoExecutionException("Conventional commit "
+                    + "validation failed", invalidCommit);
         }
     }
 
 
     @Override
-    public void setLog(org.apache.maven.plugin.logging.Log log) {
-        super.setLog(log);
-        this.log = new MojoLog(log);
+    public void setLog(final org.apache.maven.plugin.logging.Log logger) {
+        super.setLog(logger);
+        this.log = new MojoLog(logger);
     }
 }

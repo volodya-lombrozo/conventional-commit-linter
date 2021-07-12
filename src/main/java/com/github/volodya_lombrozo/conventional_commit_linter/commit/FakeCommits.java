@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class FakeCommits implements Commits{
+public final class FakeCommits implements Commits {
 
     private final Deque<Commit> commits;
 
@@ -12,12 +12,12 @@ public class FakeCommits implements Commits{
         this(new FakeCommit(), new FakeCommit(), new FakeCommit());
     }
 
-    public FakeCommits(Commit... commits){
-        this(new LinkedList<>(Arrays.asList(commits)));
+    public FakeCommits(final Commit... commitsArray) {
+        this(new LinkedList<>(Arrays.asList(commitsArray)));
     }
 
-    public FakeCommits(Deque<Commit> commits) {
-        this.commits = commits;
+    public FakeCommits(final Deque<Commit> commitsQueue) {
+        this.commits = commitsQueue;
     }
 
     @Override
