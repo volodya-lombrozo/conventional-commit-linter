@@ -11,19 +11,39 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GitCommits implements Commits {
+public final class GitCommits implements Commits {
 
+    /**
+     * Process for getting of commits from OS.
+     */
     private final GitProcess process;
 
+    /**
+     * Default constructor.
+     * Creates default Git process with the path = current_project_dir/.git.
+     */
     public GitCommits() {
         this(System.getProperty("user.dir") + File.separator + ".git");
     }
 
-    public GitCommits(String dir) {
+    /**
+     * Creates default Git process with the path = dir.
+     * Warning: .git path should be defined as part of dir path.
+     *
+     * @param dir = .git folder path
+     */
+    public GitCommits(final String dir) {
         this(new GitProcess(dir));
     }
 
-    public GitCommits(GitProcess gitProcess) {
+    /**
+     * Constructor accepts any Git process for getting of Git commits.
+     * Convenient for test purposes.
+     *
+     * @param gitProcess = any OS process (or the test one)
+     *                   for getting of Git commits.
+     */
+    public GitCommits(final GitProcess gitProcess) {
         this.process = gitProcess;
     }
 
@@ -36,7 +56,8 @@ public class GitCommits implements Commits {
     @Override
     public Deque<Commit> toQueue() throws IOException {
         final List<String> messages = process.execute();
-        final LinkedList<Commit> commits = messages.stream().map(GitCommit::new).collect(Collectors.toCollection(LinkedList::new));
+        final LinkedList<Commit> commits = messages.stream().map(GitCommit::new)
+                .collect(Collectors.toCollection(LinkedList::new));
         Collections.reverse(commits);
         return commits;
     }

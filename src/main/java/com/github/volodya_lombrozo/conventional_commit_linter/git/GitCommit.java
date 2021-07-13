@@ -4,11 +4,20 @@ import com.github.volodya_lombrozo.conventional_commit_linter.commit.Commit;
 
 import java.util.Objects;
 
-public class GitCommit implements Commit {
+public final class GitCommit implements Commit {
+
+    /**
+     * Git commit message = git log --pretty=format:%s.
+     */
     private final String message;
 
-    public GitCommit(final String message) {
-        this.message = message;
+    /**
+     * Main constructor accepts Git commit message as String.
+     *
+     * @param commitMessage - git commit message.
+     */
+    public GitCommit(final String commitMessage) {
+        this.message = commitMessage;
     }
 
     @Override
@@ -22,9 +31,13 @@ public class GitCommit implements Commit {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         GitCommit gitCommit = (GitCommit) o;
         return Objects.equals(message, gitCommit.message);
     }
