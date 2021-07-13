@@ -6,9 +6,10 @@ import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/*
- * Conventional Commit specification: https://www.conventionalcommits.org/en/v1.0.0-beta.4/
- * */
+/**
+ * Conventional Commit specification link:
+ * [https://www.conventionalcommits.org/en/v1.0.0-beta.4/].
+ */
 public class ConventionalFormat implements Format {
 
     private final List<String> types;

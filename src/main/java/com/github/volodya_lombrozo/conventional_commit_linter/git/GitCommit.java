@@ -3,12 +3,11 @@ package com.github.volodya_lombrozo.conventional_commit_linter.git;
 import com.github.volodya_lombrozo.conventional_commit_linter.commit.Commit;
 
 import java.util.Objects;
-import java.util.StringJoiner;
 
 public class GitCommit implements Commit {
     private final String message;
 
-    public GitCommit(String message) {
+    public GitCommit(final String message) {
         this.message = message;
     }
 

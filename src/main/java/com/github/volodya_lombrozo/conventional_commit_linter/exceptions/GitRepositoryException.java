@@ -4,7 +4,11 @@ import java.io.IOException;
 
 public class GitRepositoryException extends IOException {
 
-    public GitRepositoryException(Throwable cause) {
+    /**
+     * @param cause - any caused exception during the reading
+     *              of commits from OS
+     */
+    public GitRepositoryException(final Exception cause) {
         super(cause);
     }
 }
