@@ -9,16 +9,35 @@ import java.util.stream.Collectors;
 
 public class StringInputStream {
 
+    /**
+     * An input stream that will be read.
+     */
     private final InputStream is;
 
-    public StringInputStream(InputStream is) {
-        this.is = is;
+    /**
+     * @param inputStream - an input stream that will
+     *                    be converted to string further.
+     */
+    public StringInputStream(final InputStream inputStream) {
+        this.is = inputStream;
     }
 
+    /**
+     * Converts a raw InputStream to a simple string.
+     *
+     * @return list of lines joined to a single string.
+     * @throws IOException if reading lines were unsuccessful.
+     */
     public String toText() throws IOException {
         return String.join("\n", lines());
     }
 
+    /**
+     * Converts a raw InputStream to a list of strings.
+     *
+     * @return list of strings
+     * @throws IOException if reading lines were unsuccessful.
+     */
     public List<String> lines() throws IOException {
         try (is) {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
