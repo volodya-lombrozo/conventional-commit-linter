@@ -10,32 +10,60 @@ import com.github.volodya_lombrozo.conventional_commit_linter.log.Log;
 
 import java.io.IOException;
 
-public class LastCommitValidator implements Validator {
+public final class LastCommitValidator implements Validator {
 
+    /**
+     * Commits from an VCS.
+     */
     private final Commits commits;
+
+    /**
+     * Allowed commit message format.
+     */
     private final Format format;
+
+    /**
+     * Logging tool.
+     */
     private final Log log;
 
-    public LastCommitValidator(Commits commits, Format format) {
-        this(commits, format, new JavaLog());
+    /**
+     * @param verifiableCommits - commits from an VCS.
+     */
+    public LastCommitValidator(final Commits verifiableCommits) {
+        this(verifiableCommits, new FreeFormat());
     }
 
-    public LastCommitValidator(Commits commits, Format format, Log log) {
-        this.commits = commits;
-        this.format = format;
-        this.log = log;
+    /**
+     * @param verifiableCommits - commits from an VCS.
+     * @param allowedFormat     - allowed commit message format.
+     */
+    public LastCommitValidator(final Commits verifiableCommits,
+                               final Format allowedFormat) {
+        this(verifiableCommits, allowedFormat, new JavaLog());
     }
 
-    public LastCommitValidator(Commits commits) {
-        this(commits, new FreeFormat());
+    /**
+     * @param verifiableCommits - commits from an VCS.
+     * @param allowedFormat     - allowed commit message format.
+     * @param logger            - logging tool.
+     */
+    public LastCommitValidator(final Commits verifiableCommits,
+                               final Format allowedFormat,
+                               final Log logger) {
+        this.commits = verifiableCommits;
+        this.format = allowedFormat;
+        this.log = logger;
     }
 
     @Override
     public void validate() throws InvalidCommit {
         try {
             Commit commit = commits.last();
-            log.info(String.format("Validate last commit: %s by the format: %s", commit, format));
-            new CommitValidator(commit, format).validate();
+            final String logMessage = String.format("Validate last commit: "
+                    + "%s by the format: %s", commit, this.format);
+            log.info(logMessage);
+            new CommitValidator(commit, this.format).validate();
         } catch (IOException ioe) {
             throw new InvalidCommit(commits, format, ioe);
         }

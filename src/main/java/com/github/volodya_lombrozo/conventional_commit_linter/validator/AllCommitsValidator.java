@@ -10,24 +10,50 @@ import com.github.volodya_lombrozo.conventional_commit_linter.log.Log;
 
 import java.io.IOException;
 
-public class AllCommitsValidator implements Validator {
+public final class AllCommitsValidator implements Validator {
 
+    /**
+     * Commits from an VCS.
+     */
     private final Commits commits;
+
+    /**
+     * Allowed commit message format.
+     */
     private final Format format;
+
+    /**
+     * Logging tool.
+     */
     private final Log log;
 
-    public AllCommitsValidator(Commits commits) {
-        this(commits, new FreeFormat());
+    /**
+     * @param verifiableCommits - commits from an VCS.
+     */
+    public AllCommitsValidator(final Commits verifiableCommits) {
+        this(verifiableCommits, new FreeFormat());
     }
 
-    public AllCommitsValidator(Commits commits, Format format) {
-        this(commits, format, new JavaLog());
+    /**
+     * @param verifiableCommits - commits from an VCS.
+     * @param allowedFormat     - allowed commit message format.
+     */
+    public AllCommitsValidator(final Commits verifiableCommits,
+                               final Format allowedFormat) {
+        this(verifiableCommits, allowedFormat, new JavaLog());
     }
 
-    public AllCommitsValidator(Commits commits, Format format, Log log) {
-        this.commits = commits;
-        this.format = format;
-        this.log = log;
+    /**
+     * @param verifiableCommits - commits from an VCS.
+     * @param allowedFormat     - allowed commit message format.
+     * @param logger            - logging tool.
+     */
+    public AllCommitsValidator(final Commits verifiableCommits,
+                               final Format allowedFormat,
+                               final Log logger) {
+        this.commits = verifiableCommits;
+        this.format = allowedFormat;
+        this.log = logger;
     }
 
     @Override
@@ -42,7 +68,8 @@ public class AllCommitsValidator implements Validator {
     private void tryValidate() throws IOException, InvalidCommit {
         log.info("Validate by 'AllCommitsValidator'");
         for (Commit commit : commits.toQueue()) {
-            log.info(String.format("Validate commit %s by the format %s", commit, format));
+            log.info(String.format("Validate commit %s by the format %s",
+                    commit, format));
             CommitValidator validator = new CommitValidator(commit, format);
             validator.validate();
         }
