@@ -27,7 +27,8 @@ public final class FailValidator implements Validator {
 
     @Override
     public void validate() throws InvalidCommit {
-        log.info("Validate by 'FailValidator'. InvalidCommit exception will be thrown");
+        log.info("Validate by 'FailValidator'."
+                + " InvalidCommit exception will be thrown");
         throw new InvalidCommit("Invalid commit");
     }
 }

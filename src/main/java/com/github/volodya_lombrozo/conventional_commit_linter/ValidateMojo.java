@@ -11,11 +11,20 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 @Mojo(name = "scan", defaultPhase = LifecyclePhase.VALIDATE)
-public class ValidateMojo extends AbstractMojo {
+public final class ValidateMojo extends AbstractMojo {
 
+    /**
+     * The plugin configuration property for scan strategy.
+     *
+     * @see Scan enum for all available values.
+     */
     @Parameter(property = "scan", defaultValue = "NOTHING")
-    public String scan;
+    private String scan;
 
+
+    /**
+     * The plugin logger.
+     */
     private Log log = new MojoLog(getLog());
 
     @Override
