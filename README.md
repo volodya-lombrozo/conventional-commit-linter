@@ -6,15 +6,58 @@ Maven Plugin linter for [conventional commits](https://www.conventionalcommits.o
 
 # How to use
 
-Add plugin to pom.xml (to plugins section)
+Add the plugin to your `pom.xml` file to the plugins section.
 
 ```XML
+
 <plugin>
     <groupId>com.github.volodya-lombrozo</groupId>
     <artifactId>conventional-commit-linter</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>
+                    scan
+                </goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
+The default maven phase is **validate**.
+
+## Change scan mode
+
+Available scan modes:
+
+* **ALL** - the plugin will scan all repository commits messages one by one starting from the earliest. Conventional
+  commits format will be used.
+* **LAST** - the plugin will scan only the last commit. Conventional commits format will be used.
+* **NOTHING** - the plugin will scan nothing. Validation will always be **successful** regardless of the commit
+  messages.
+* **FAIL** - the plugin will scan nothing. Validation will always be **failed** regardless of the commit messages.
+
+The default plugin mode is the **LAST**.
+In order to change a scan mode you could add the next configuration to your plugin:
+
+```xml
+
+<configuration>
+    <scan>ALL</scan>
+</configuration>
+```
+
+The full plugin example:
+
+```xml
+<plugin>
+    <groupId>com.github.volodya-lombrozo</groupId>
+    <artifactId>conventional-commit-linter</artifactId>
+    <version>0.0.6</version>
     <configuration>
-        <scan>ALL</scan>
+        <scan>FAIL</scan>
     </configuration>
     <executions>
         <execution>
@@ -27,12 +70,3 @@ Add plugin to pom.xml (to plugins section)
     </executions>
 </plugin>
 ```
-The default maven phase is **validate**.
-
-Available scan modes:
-
-* ALL - the plugin will scan all repository commits messages one by one starting from the earliest. Conventional commits
-  format will be used.
-* LAST - the plugin will scan only the last commit. Conventional commits format will be used.
-* NOTHING - the plugin will scan nothing. Validation will always be **successful** regardless of the commit messages.
-* FAIL - the plugin will scan nothing. Validation will always be **failed** regardless of the commit messages.
