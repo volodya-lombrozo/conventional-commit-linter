@@ -18,8 +18,8 @@ public final class ValidateMojo extends AbstractMojo {
      *
      * @see Scan enum for all available values.
      */
-    @Parameter(property = "scan", defaultValue = "NOTHING")
-    private String scan;
+    @Parameter(property = "scan", defaultValue = "LAST")
+    private final String scan = Scan.LAST.name();
 
 
     /**
@@ -47,5 +47,16 @@ public final class ValidateMojo extends AbstractMojo {
     public void setLog(final org.apache.maven.plugin.logging.Log logger) {
         super.setLog(logger);
         this.log = new MojoLog(logger);
+    }
+
+    /**
+     * Get the plugin scan mode.
+     * The method is needed for test purposes.
+     *
+     * @return scan mode as String value.
+     * @see Scan enum for all available values.
+     */
+    public String getScan() {
+        return scan;
     }
 }

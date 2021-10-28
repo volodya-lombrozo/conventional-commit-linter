@@ -11,6 +11,8 @@ import org.mockito.Mockito;
 
 import java.nio.file.Path;
 
+import static org.junit.Assert.assertEquals;
+
 public class IntegrationMojoTest {
 
     @Rule
@@ -35,12 +37,24 @@ public class IntegrationMojoTest {
         Assert.fail();
     }
 
-    private Mojo createMojo(Path pom) throws Exception {
-        return rule.lookupMojo("scan", pom.toFile());
+
+    @Test
+    public void withoutConfiguration() throws Exception {
+        final ValidateMojo mojo = createMojo(without());
+
+        assertEquals("LAST", mojo.getScan());
+    }
+
+    private ValidateMojo createMojo(Path pom) throws Exception {
+        return (ValidateMojo) rule.lookupMojo("scan", pom.toFile());
     }
 
     private Path nothing() {
         return resources().resolve("test.pom.xml");
+    }
+
+    private Path without() {
+        return resources().resolve("without_configuration.pom.xml");
     }
 
     private Path fail() {
